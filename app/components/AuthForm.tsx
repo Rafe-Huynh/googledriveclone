@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import Link from "next/link";
-import { createAccount } from "@/lib/actions/user.action";
+import { createAccount, signinUser } from "@/lib/actions/user.action";
 import OTPModal from "./OTPModal";
 type FormType = "sign-in" | "sign-up";
 const formSchema = z.object({
@@ -50,10 +50,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setIsLoading(true)
     setErrorMessage('')
     try {
-      const user = await createAccount({
+      const user = type === "sign-up" ?  await createAccount({
         fullName: values.fullName || "",
-        email: values.email
-      })
+        email: values.email,
+        
+      }) : await signinUser({email: values.email});
       setAccountId(user.accountId)
     } catch (error) {
       setErrorMessage("Failed to create account. Please try again")
