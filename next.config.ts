@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname:'www.google.com'
       }
     ]
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '100MB'
+    }
   }
 };
 
