@@ -8,8 +8,8 @@ import React from 'react'
  
 const Page = async ({searchParams, params} : SearchParamProps) => {
     const type = (await params)?.type as string || ' '
-    const searchText = ((await params)?.query as string) || ""
-    const sort = ((await params)?.sort as string) || ""
+    const searchText = ((await searchParams)?.query as string) || ""
+    const sort = ((await searchParams)?.sort as string) || ""
     const types = getFileTypesParams(type) as FileType[]
     const files = await getFile({types, searchText, sort})
   return (

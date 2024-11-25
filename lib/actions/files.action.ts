@@ -59,17 +59,19 @@ const createQueries = (currentUser: Models.Document, types: string[],searchText:
     if (types.length > 0 ) {
         queries.push(Query.equal('type', types))
     }
-    if (searchText ) {
+    if (searchText) {
         queries.push(Query.contains('name', searchText))
     }
     if (limit){
         queries.push(Query.limit(limit))
     }
-    const [sortBy, orderBy] = sort.split('-')
-    queries.push(orderBy === 'asc' ?Query.orderAsc(sortBy) : Query.orderDesc(sortBy))
+    if (sort){
+    const [sortBy, orderBy] = sort.split("-")
+    queries.push(orderBy === 'asc' ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy))
+    }
     return queries
 }
-export const getFile = async ({types = [], searchText = '', sort = '$createdAt-desc', limit}: GetFilesProps) => {
+export const getFile = async ({types = [], searchText = '', sort = "$createdAt-desc", limit}: GetFilesProps) => {
     const {databases} = await createAdminClient()
     try {
         const currentUser = await getUser()
