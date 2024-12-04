@@ -233,3 +233,16 @@ export const getFileTypesParams = (type: string) => {
       return ["document"];
   }
 };
+export const calculateAngle = (usedStorage: number): number => {
+  // Define the maximum storage value (in bytes)
+  const maxStorage = 2 * 1024 * 1024 * 1024; // 2GB in bytes
+  
+  // Calculate the percentage of used storage
+  const percentageUsed = usedStorage / maxStorage;
+  
+  // The angle should be proportional to the percentage of used storage (0 to 360 degrees)
+  const angle = percentageUsed * 360;
+  
+  // Ensure the angle doesn't exceed 360 degrees (in case of any rounding errors)
+  return Math.min(angle, 360);
+};
