@@ -1,17 +1,20 @@
 import Card from '@/app/components/Card'
 import Sort from '@/app/components/Sort'
-import { getFile } from '@/lib/actions/files.action'
-import { getFileTypesParams } from '@/lib/utils'
+import { getFile, getTotalSpaceUsed } from '@/lib/actions/files.action'
+import { convertFileSize, getFileTypesParams, getUsageSummary } from '@/lib/utils'
 import { Models } from 'node-appwrite'
 import React from 'react'
-
- 
 const Page = async ({searchParams, params} : SearchParamProps) => {
     const type = (await params)?.type as string || ' '
     const searchText = ((await searchParams)?.query as string) || ""
     const sort = ((await searchParams)?.sort as string) || ""
     const types = getFileTypesParams(type) as FileType[]
-    const files = await getFile({types, searchText, sort})
+    const files = await getFile({ types, searchText, sort });
+    const totalSpace = await getTotalSpaceUsed();
+    const usageSummary = getUsageSummary(totalSpace);
+    const specificUsage = usageSummary.find((summary) => 
+      summary.title.toLowerCase() === type.toLowerCase()
+    );
   return (
     <div className='page-container'>
       <section className="w-full">
@@ -21,7 +24,9 @@ const Page = async ({searchParams, params} : SearchParamProps) => {
         <div className='total-size-section'>
         <p className='body-1'>
         Total: <span className='body-1'>
-        0 MB
+        {specificUsage
+                ? convertFileSize(specificUsage.size)
+                : "0 Bytes"}
         </span>
         </p>
         <div className='sort-container'>

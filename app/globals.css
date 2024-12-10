@@ -219,7 +219,10 @@
     @apply absolute -left-3 top-[-25px] z-10 w-[190px] object-contain !important;
   }
   .summary-type-size {
-    @apply h4 relative z-20 w-full text-right !important;
+    @apply h4 relative z-20 w-full text-right;
+     /* Limit the width of the text */
+    overflow: hidden; /* Ensure that any overflow is hidden */
+    white-space: nowrap !important;
   }
   .summary-type-title {
     @apply h5 relative z-20 text-center !important;
