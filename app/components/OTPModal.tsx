@@ -10,14 +10,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@/app/components/ui/alert-dialog";
 
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/app/components/ui/input-otp";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { sendEmailOTP, verifySecret } from "@/lib/actions/user.action";

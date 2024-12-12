@@ -1,14 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/app/components/ui/dropdown-menu";
 import { Models } from "node-appwrite";
 import Image from "next/image";
 import { actionsDropdownItems } from "@/constants";
@@ -27,6 +19,7 @@ import { Button } from "./ui/button";
 import {deleteFile, renameFile, updateFileUsers } from "@/lib/actions/files.action";
 import { usePathname } from "next/navigation";
 import { FileDetails, ShareInput } from "./ActionModalCotent";
+import { Dialog, DialogContent, DialogFooter, DialogHeader,DialogTitle } from "./ui/dialog";
 
 
 const ActionDropdown = ({ file }: { file: Models.Document }) => {

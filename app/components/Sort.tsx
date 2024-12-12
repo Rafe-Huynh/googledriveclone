@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/app/components/ui/select";
 import { usePathname, useRouter } from "next/navigation";
 import { sortTypes } from "@/constants";
 

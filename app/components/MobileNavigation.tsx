@@ -7,16 +7,16 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/app/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/app/components/ui/separator"
 import { navItems } from "@/constants";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import FileUploader from "./FileUploader";
-import { signoutUser } from "@/lib/actions/user.action";
+import { signOutUser } from "@/lib/actions/user.action";
 interface Props{
   ownerId: string,
   accountId: string,
@@ -75,7 +75,7 @@ const MobileNavigation = ({ownerId, accountId, fullName, avatar, email}: Props) 
            <Separator className="my-5 bg-light-200/20"/>
            <div className="flex flex-col justify-between gap-5">
                 <FileUploader ownerId={ownerId} accountId={accountId}/>
-                <Button type="submit" className='mobile-sign-out-button' onClick={async () => await signoutUser()}>
+                <Button type="submit" className='mobile-sign-out-button' onClick={async () => await signOutUser()}>
                     <Image src="/assets/icons/logout.svg" alt="logo" width={24} height={24}/>
                     <p>Log out</p>
                 </Button>
