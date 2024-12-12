@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Models } from "node-appwrite";
 import Image from "next/image";
 import { actionsDropdownItems } from "@/constants";

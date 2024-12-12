@@ -7,10 +7,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/app/components/ui/sheet";
+} from "@/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Separator } from "@/app/components/ui/separator"
+import { Separator } from "@/components/ui/separator"
 import { navItems } from "@/constants";
 import Link from "next/link";
 import { cn } from "@/lib/utils";

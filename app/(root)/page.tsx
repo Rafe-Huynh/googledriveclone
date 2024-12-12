@@ -3,12 +3,13 @@ import { convertFileSize, getUsageSummary } from '@/lib/utils'
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Separator } from '@radix-ui/react-separator'
-import FormattedDateTime from '../components/FormattedDateTime'
-import { Chart } from '../components/Chart'
+import { Separator } from '@/components/ui/separator'
+import { Chart } from '@/components/Chart'
 import { Models } from 'node-appwrite'
-import Thumbnail from '../components/Thumbnail'
-import ActionDropdown from '../components/ActionDropdown'
+import Thumbnail from '@/components/Thumbnail'
+import FormattedDateTime from '@/components/FormattedDateTime'
+import ActionDropdown from '@/components/ActionDropdown'
+
 
 const Dashboard = async () => {
   const [files, totalSpace] = await Promise.all([

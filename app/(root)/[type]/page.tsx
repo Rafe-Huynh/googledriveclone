@@ -1,5 +1,5 @@
-import Card from '@/app/components/Card'
-import Sort from '@/app/components/Sort'
+import Card from '@/components/Card'
+import Sort from '@/components/Sort'
 import { getFile, getTotalSpaceUsed } from '@/lib/actions/files.action'
 import { convertFileSize, getFileTypesParams, getUsageSummary } from '@/lib/utils'
 import { Models } from 'node-appwrite'

@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 
 
-import { ChartConfig, ChartContainer } from '@/app/components/ui/chart';
+import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import {
   calculatePercentage,
   calculateAngle,
