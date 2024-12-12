@@ -1,12 +1,13 @@
 'use server'
 
-import { createAdminClient, createSessionClient } from "@/lib/appwrite"
-import { appwriteConfig } from "@/lib/appwrite/config"
+
 import { ID, Query } from "node-appwrite"
 import { string } from "zod"
 import { parseStringify } from "../utils"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import { createAdminClient, createSessionClient } from "../appwrite"
+import { appwriteConfig } from "../appwrite/config"
 
 
 const getUserByEmail = async (email: string) => {

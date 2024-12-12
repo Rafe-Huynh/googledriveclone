@@ -20,48 +20,50 @@ import Link from "next/link";
 import { createAccount, signinUser } from "@/lib/actions/user.action";
 import OTPModal from "./OTPModal";
 type FormType = "sign-in" | "sign-up";
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-});
-const authFormSchema = (formType: FormType)=>{
+
+const authFormSchema = (formType: FormType) => {
   return z.object({
-    email:z.string().email(),
-    fullName: formType === "sign-up" ? z.string().min(2).max(50): z.string().optional()
-  })
-}
+    email: z.string().email(),
+    fullName:
+      formType === "sign-up"
+        ? z.string().min(2).max(50)
+        : z.string().optional(),
+  });
+};
+
 const AuthForm = ({ type }: { type: FormType }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [accountId, setAccountId] = useState(null)
-  const formSchema = authFormSchema(type)
-  // 1. Define your form.
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [accountId, setAccountId] = useState(null);
+
+  const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fullName: "",
-      email: ""
+      email: "",
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    setIsLoading(true)
-    setErrorMessage('')
+    setIsLoading(true);
+    setErrorMessage("");
+
     try {
-      const user = type === "sign-up" ?  await createAccount({
-        fullName: values.fullName || "",
-        email: values.email,
-        
-      }) : await signinUser({email: values.email});
-      setAccountId(user.accountId)
-    } catch (error) {
-      setErrorMessage("Failed to create account. Please try again")
-    } finally{
-      setIsLoading(false)
+      const user =
+        type === "sign-up"
+          ? await createAccount({
+              fullName: values.fullName || "",
+              email: values.email,
+            })
+          : await signinUser({ email: values.email });
+
+      setAccountId(user.accountId);
+    } catch {
+      setErrorMessage("Failed to create account. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-    
   };
 
   return (
@@ -94,6 +96,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
               )}
             />
           )}
+
           <FormField
             control={form.control}
             name="email"
@@ -115,30 +118,47 @@ const AuthForm = ({ type }: { type: FormType }) => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="form-submit-button" disabled={isLoading}>
+
+          <Button
+            type="submit"
+            className="form-submit-button"
+            disabled={isLoading}
+          >
             {type === "sign-in" ? "Sign In" : "Sign Up"}
+
             {isLoading && (
-              <Image src ="/assets/icons/loader.svg" alt="loader" width={24} height={24} className="ml-2 animate-spin"  />
+              <Image
+                src="/assets/icons/loader.svg"
+                alt="loader"
+                width={24}
+                height={24}
+                className="ml-2 animate-spin"
+              />
             )}
           </Button>
-          {errorMessage && (
-            <p className="error-message">
-              *{errorMessage}
-            </p>
-          )}
+
+          {errorMessage && <p className="error-message">*{errorMessage}</p>}
+
           <div className="body-2 flex justify-center">
             <p className="text-light-100">
-              {type === "sign-in" ? "Dont have an account?" : "Already have an account"}
+              {type === "sign-in"
+                ? "Don't have an account?"
+                : "Already have an account?"}
             </p>
-            <Link href={type === "sign-in" ? "/sign-up" : "/sign-in"} className="ml-1 font-medium text-brand">
-            {type === "sign-in" ? "Sign Up" : "Sign In"}
+            <Link
+              href={type === "sign-in" ? "/sign-up" : "/sign-in"}
+              className="ml-1 font-medium text-brand"
+            >
+              {" "}
+              {type === "sign-in" ? "Sign Up" : "Sign In"}
             </Link>
           </div>
         </form>
       </Form>
-      {
-        accountId && <OTPModal email={form.getValues('email')} accountId={accountId}/>
-      }
+
+      {accountId && (
+        <OTPModal email={form.getValues("email")} accountId={accountId} />
+      )}
     </>
   );
 };
